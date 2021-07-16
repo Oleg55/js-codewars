@@ -70,3 +70,38 @@ function DNAStrand(dna = "AAAAA"){
 }
 
 DNAStrand()
+
+
+//https://www.codewars.com/kata/5656b6906de340bd1b0000ac/train/javascript  Two to One
+
+function longest(s1 = "xyaabbbccccdefww", s2 = "xxxxyyyyabklmopq" ) {
+    
+    const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+    const s1Array = s1.split('').concat(s2.split(''));
+
+    const s1ArraySort = {};
+
+    s1Array.forEach((item) => {
+        const indexItem = alphabet.indexOf(item);
+        s1ArraySort[indexItem] = item;
+    });
+
+    console.log(s1ArraySort);
+    const afterSortArr = [];
+    
+    for (arr in s1ArraySort) {
+        console.log(s1ArraySort[arr]);
+        afterSortArr.push(s1ArraySort[arr]);
+    }
+
+    console.log(afterSortArr.join(''));
+
+    // s1ArraySort.forEach((item) => {
+
+    // });
+
+    //return 
+}
+
+longest()
