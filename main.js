@@ -33,39 +33,40 @@ function duplicateCount(text = "Indivisibility"){
     for (let i = 0; i < newTextMass.length -1; i++) {
         let localCount = 0;
         for(let j = 0; j < newTextMass.length; j++){
-            console.log(newTextMass[i] + '' + newTextMass[j]);
-           
             if(newTextMass[i] === newTextMass[j]) {
                 localCount += 1;
-                console.log('Before if localCount = ' + localCount);
                 if(localCount === 2){
                     if(newElemMass.indexOf(newTextMass[i]) !== -1){
-                        console.log('estb---------------------');
                         localCount = 0;
                     }else{
-                        console.log('indexOf ' + newElemMass.indexOf(newTextMass[i]));
                         newElemMass.push(newTextMass[i]);
-                        console.log('just push elem ' + newTextMass[i]);
-                        console.log('newMassLocal = ' + newElemMass);
                         localCount = 0;
                     }
 
                 }
-
-                    // console.log('indexOf ' + newElemMass.indexOf(newTextMass[i]));
-                    // newElemMass.push(newTextMass[i]);
-                    // console.log('just push elem ' + newTextMass[i]);
             }
-            console.log('local = ' + localCount);
         }
     }
-
-    console.log('global-out-count = ' + count);
-
-    console.log('newMass = ' + newElemMass);
-
-    console.log('Dublicate = ' + newElemMass.length)
 
     return newElemMass.length;
 }
 duplicateCount();
+
+
+
+//https://www.codewars.com/kata/554e4a2f232cdd87d9000038/train/javascript  Complementary DNA
+
+
+function DNAStrand(dna = "AAAAA"){
+
+    const newDna =  dna.toLowerCase().split('');
+    console.log(newDna);
+
+    const newDnaMass = newDna.map(function(item, index, arr){
+        return item === 'a' ?  item = 't' : item === 't' ? item = 'a' : item === 'g' ? item = 'c' : item === 'c' ? item = 'g' : '';
+    });
+
+    console.log(newDnaMass.join('').toUpperCase());
+}
+
+DNAStrand()
