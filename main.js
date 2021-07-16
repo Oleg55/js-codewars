@@ -87,21 +87,36 @@ function longest(s1 = "xyaabbbccccdefww", s2 = "xxxxyyyyabklmopq" ) {
         s1ArraySort[indexItem] = item;
     });
 
-    console.log(s1ArraySort);
     const afterSortArr = [];
     
     for (arr in s1ArraySort) {
-        console.log(s1ArraySort[arr]);
         afterSortArr.push(s1ArraySort[arr]);
     }
 
-    console.log(afterSortArr.join(''));
-
-    // s1ArraySort.forEach((item) => {
-
-    // });
-
-    //return 
+    return afterSortArr.join('')
 }
 
 longest()
+
+
+//https://www.codewars.com/kata/5264d2b162488dc400000001/train/javascript Stop gninnipS My sdroW!
+
+function spinWords(string = "This is another test"){
+    const newStringArr = string.split(' ');
+    const reversStringArr = newStringArr.map(function(item) {
+       // console.log(item.split('').reverse());
+        const itemArr = item.split('');
+        if( itemArr.length >= 5){
+            return itemArr.reverse().join('').trim();
+        }else{
+            return itemArr.join('').trim();
+        }
+        
+    })
+   // console.log(newStringArr);
+    //console.log(reversStringArr.join(' '));
+    return reversStringArr.join(' ');
+}
+
+
+spinWords()
