@@ -20,3 +20,52 @@ function alphabetPosition(text) {
 alphabetPosition();
 
 
+//https://www.codewars.com/kata/54bf1c2cd5b56cc47f0007a1/train/javascript Counting Duplicates
+
+function duplicateCount(text = "Indivisibility"){
+    
+    const newTextMass = text.toLowerCase().split('');
+
+    const newElemMass = [];
+
+    let count = 0;
+    
+    for (let i = 0; i < newTextMass.length -1; i++) {
+        let localCount = 0;
+        for(let j = 0; j < newTextMass.length; j++){
+            console.log(newTextMass[i] + '' + newTextMass[j]);
+           
+            if(newTextMass[i] === newTextMass[j]) {
+                localCount += 1;
+                console.log('Before if localCount = ' + localCount);
+                if(localCount === 2){
+                    if(newElemMass.indexOf(newTextMass[i]) !== -1){
+                        console.log('estb---------------------');
+                        localCount = 0;
+                    }else{
+                        console.log('indexOf ' + newElemMass.indexOf(newTextMass[i]));
+                        newElemMass.push(newTextMass[i]);
+                        console.log('just push elem ' + newTextMass[i]);
+                        console.log('newMassLocal = ' + newElemMass);
+                        localCount = 0;
+                    }
+
+                }
+
+                    // console.log('indexOf ' + newElemMass.indexOf(newTextMass[i]));
+                    // newElemMass.push(newTextMass[i]);
+                    // console.log('just push elem ' + newTextMass[i]);
+            }
+            console.log('local = ' + localCount);
+        }
+    }
+
+    console.log('global-out-count = ' + count);
+
+    console.log('newMass = ' + newElemMass);
+
+    console.log('Dublicate = ' + newElemMass.length)
+
+    return newElemMass.length;
+}
+duplicateCount();
