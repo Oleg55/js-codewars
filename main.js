@@ -120,3 +120,59 @@ function spinWords(string = "This is another test"){
 
 
 spinWords()
+
+
+//https://www.codewars.com/kata/53368a47e38700bd8300030d/train/javascript Format a string of names like 'Bart, Lisa & Maggie'.
+
+function list(names){
+
+    const newNamesArr1 = []
+    const newNamesArr2 = []
+    
+    const arrNames =  names.map(function(item) {
+        return item.name
+    })
+    if(arrNames.length >= 3) {
+        let bedoreLastElement = arrNames.length - 2
+        let lastElement = arrNames.length - 1
+        newNamesArr1.push(arrNames.pop(lastElement))
+        newNamesArr1.push(arrNames.pop(bedoreLastElement))
+      //  console.log(newNamesArr1);
+      //  console.log(arrNames);
+        let newStr1 = arrNames.join(', ');
+      //  console.log(newStr1.length);
+        if(newStr1.length > 0) {
+            newStr1 = newStr1 + ', ';  
+        }
+       const reversNamesArr1 = newNamesArr1.reverse()
+        let newStr2 =  reversNamesArr1.join(' & ');
+       // return newStr1 + newStr2
+          console.log(newStr1 + newStr2);
+    }else if(arrNames.length === 2){
+        let newStr3 = arrNames.join(' & ');
+        let newStr4 =  newNamesArr1.join(', ');
+        console.log(newStr3 + newStr4);
+      //return newStr3 + newStr4
+    }else if(arrNames.length === 1) {
+        let newStr5 = arrNames.join(' ');
+        console.log(newStr5);
+      //  return newStr5
+    }else if(arrNames.length === 0) {
+        console.log('');
+       // return ''
+    }
+
+}
+
+list([ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Maggie'} ])
+// returns 'Bart, Lisa & Maggie'
+
+list([ {name: 'Bart'}, {name: 'Lisa'} ])
+// returns 'Bart & Lisa'
+
+list([ {name: 'Bart'} ])
+// returns 'Bart'
+
+list([])
+// returns ''
+
