@@ -163,6 +163,7 @@ function list(names){
     }
 
 }
+list([ {name: 'Bart'}, {name: 'Nastya'}, {name: 'Lisa'}, {name: 'Maggie'} ])
 
 list([ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Maggie'} ])
 // returns 'Bart, Lisa & Maggie'
@@ -176,3 +177,41 @@ list([ {name: 'Bart'} ])
 list([])
 // returns ''
 
+//https://www.codewars.com/kata/54e6533c92449cc251001667/train/javascript Unique In Order
+
+var uniqueInOrder = function(iterable){
+    // your code here - remember iterable can be a string or an array
+    // console.log(typeof iterable);
+    const newObj = {}
+    const newObjToArray = []
+
+    const newObjFromString = {}
+    const newObjFromStringToArray = []
+
+    if(typeof iterable === 'string'){
+        const uniqueOrderString = iterable.split('')
+        const uniqueOrderArrayFromString = uniqueOrderString.map((item, index) => {
+            return newObjFromString[item] = index
+         })
+         for(key in newObjFromString) {
+            newObjFromStringToArray.push(key)
+         }
+        // console.log(newObjFromString);
+        // console.log(newObjFromStringToArray);
+        return newObjFromStringToArray
+    }else {
+        const uniqueOrderArray = iterable.map((item, index) => {
+           return newObj[item] = index
+        })
+        for(key in newObj) {
+            newObjToArray.push(+key)
+        }
+        //  console.log(newObj);
+       //   console.log(newObjToArray);
+       return newObjToArray
+    }
+}
+
+  uniqueInOrder('AAAABBBCCDAABBB')
+  uniqueInOrder('ABBCcAD')        
+  uniqueInOrder([1,2,2,3,3])       
