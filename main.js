@@ -194,7 +194,7 @@ var uniqueInOrder = function(iterable){
                 }
             }
         })   
-        return niqueArrStrings
+        return uniqueArrStrings
     }else {
         iterable.forEach((item, index) => {
             if(item !== iterable[index + 1] ) {
