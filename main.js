@@ -220,25 +220,25 @@ var uniqueInOrder = function(iterable){
 function persistence(num) {
                                                         
     let toStr = '' + num; //999
-    console.log('length = ' + toStr.length); // 3
+    // console.log('length = ' + toStr.length); // 3
     let arrStr = toStr.split('') // ['9','9','9']
     const arrRes = [] // []
     let count = 0
     function moreOne(toStr) {
         let toStr2 = '' + toStr;
-        console.log('>>>>>>>>>>>' + toStr2); // 999
+        //  console.log('>>>>>>>>>>>' + toStr2); // 999
         let arrStr2 = toStr2.split('')
         for (let i = 0; i <= toStr2.length - 1 ; i++) {
             let res = arrStr2.reduce((accumulator, currentValue, index) => {
                 let Multiply = accumulator * (+currentValue)
-                console.log('Multiply (i = 0)= ' + Multiply);
+                //  console.log('Multiply (i = 0)= ' + Multiply);
                 return Multiply
             }, 1)
 
             toStr2 = res
             console.log('toStr = res = '+ toStr2);
             arrRes.push(res)
-            console.log('return this = ' + toStr2);
+            //  console.log('return this = ' + toStr2);
             if(arrStr2.length === 1) {
                 console.log('one');
             }else{
@@ -247,71 +247,17 @@ function persistence(num) {
             } 
             
         }
-        console.log('Now in toStr = ' + toStr2);
-    console.log('toStr =' + toStr2 + 'length =' + toStr2.length);
+        //  console.log('Now in toStr = ' + toStr2);
+        //  console.log('toStr =' + toStr2 + 'length =' + toStr2.length);
         
     }
-    console.log('arrRes = ' + arrRes);
+    //  console.log('arrRes = ' + arrRes);
     moreOne(toStr)
-    console.log('count = ' + count);
+    //  console.log('count = ' + count);
 
-    if(arrRes[arrRes.length - 1].length > 1) {
-       // console.log('мы тут 1');
-       // console.log('Now in toStr = ' + toStr);
-       // moreOne(toStr)
-        
-    }else {
-      //  console.log('мы в else');
-      //  moreOne(toStr)
-    }
-    
-
-    // if(arrRes.length > 0) {
-    //     arrRes.forEach((item, index) => {
-    //     let toStr2 = '' + item;
-    //     const arrStr2 = toStr2.split('')
-    //     let res = arrStr2.reduce((accumulator, currentValue, index) => {
-    //         let Multiply = accumulator * (+currentValue)
-    //         console.log('Multiply (i != 0)= ' + Multiply);
-    //         return Multiply
-    //     })
-    //     toStr = res
-    //     console.log('toStr = res = '+ toStr);
-    //     arrRes.push(res)
-    //  })
-    // }
-
-    // arrRes.forEach((item, index) => {
-    //     let toStr2 = '' + item;
-    //     const arrStr2 = toStr2.split('')
-    //     let res = arrStr2.reduce((accumulator, currentValue, index) => {
-    //         let Multiply = accumulator * (+currentValue)
-    //         console.log('Multiply (i != 0)= ' + Multiply);
-    //         return Multiply
-    //     })
-    //     toStr = res
-    //     console.log('toStr = res = '+ toStr);
-    //     arrRes.push(res)
-    // }) 
-    
-    
-    
-    if(arrStr.length === 1) {
-        //console.log(counter);
-       // console.log(multi)
-    }else{
-      //  return persistence(multi)
-    } 
-   // console.log(arrRes);
+    return count
     
  }
 
- persistence(39) === 3 // because 3*9 = 27, 2*7 = 14, 1*4=4
-                       // and 4 has only one digit
-                 
- persistence(999) === 4 // because 9*9*9 = 729, 7*2*9 = 126,
-                        // 1*2*6 = 12, and finally 1*2 = 2
-                  
- persistence(4) === 0
 
  
