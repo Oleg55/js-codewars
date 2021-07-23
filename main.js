@@ -260,4 +260,171 @@ function persistence(num) {
  }
 
 
- 
+ //https://www.codewars.com/kata/57b06f90e298a7b53d000a86/train/javascript The Supermarket Queue
+
+//  function queueTime(customers, n) {
+
+//     const min = Math.min(...customers)
+//     indexMin = customers.indexOf(min);
+//     //console.log(indexMin);
+
+//     const max = Math.max(...customers)
+//     indexMax = customers.indexOf(max);
+//    // console.log(indexMax);
+//    if(customers.length == 0){
+//     console.log(0);
+//     return 0
+//    } else if(n == 1){
+//         let red = customers.reduce((accumulator, currentValue, index) => {
+//             let summ = accumulator + currentValue
+//             return summ
+//         }, 0)
+//         console.log('we1');
+//         console.log(red);
+//         return red
+//     }
+//     else if(max < n && indexMax != 0) {
+//         // let red = customers.reduce((accumulator, currentValue, index) => {
+//         //     let summ = accumulator + currentValue
+//         //     return summ
+//         // }, 0)
+//         console.log('we2');
+//         console.log(max);
+//         return max
+//     }else if(indexMax == 0){
+//         console.log('we3');
+//         console.log(max);
+//         return max
+//     }else if(indexMax == customers.length - 1) {
+//         let SM =  min + max
+//         console.log('we4');
+//         console.log(SM);
+//         return SM
+//     }else {
+//         let red = customers.reduce((accumulator, currentValue, index) => {
+//             let summ = accumulator + currentValue
+//             return summ
+//         }, 0)
+//         console.log('we5');
+//         console.log(red/n);
+//         return red/n
+//     }
+
+//     // let arrCustomers = customers
+//     // console.log(arrCustomers);
+//     // let countKassas = n
+//     // let massQue = []
+//     // let moreKassQ = []
+//     // let newArr = []
+//     // if(n == 1){
+//     //     let red = arrCustomers.reduce((accumulator, currentValue, index) => {
+//     //         let summ = accumulator + currentValue
+//     //         return summ
+//     //     }, 0)
+//     //     console.log(red);
+//     // }else {
+//     //     for(let i = 0; i < n; i++) {
+//     //         massQue.push(arrCustomers[i]) 
+//     //     }
+//     // }
+//     // console.log('massQue = '+ massQue);
+
+//     // massQue.forEach((item, index) => {
+//     //     if(item < massQue[index + 1]){
+//     //         moreKassQ.push(item)
+//     //     }
+//     // })
+
+//     // massQue.sort(function(a, b) {
+//     // return a - b;
+//     // });
+
+//     // console.log('отсортированный massQue = ' +  massQue);
+
+//     // const min = Math.min(...massQue)
+//     // i = massQue.indexOf(min);
+//     // if(i >= 0) {
+//     //     massQue.splice(i,1);
+//     // }
+//     // newArr.push(min)
+//     // console.log(min)
+//     // console.log('newArr = ' + newArr);
+//     // console.log('massQue = ' + massQue);
+//     // console.log('moreKassQ = ' + moreKassQ);
+
+//     // if(massQue.length < countKassas) {
+//     //     n = countKassas + 1
+//     //     massQue.push(arrCustomers[n]) 
+        
+//     // }
+
+//     // if(massQue.length == countKassas) {
+//     //     massQue.sort(function(a, b) {
+//     //         return a - b;
+//     //         });
+        
+//     //         console.log('отсортированный massQue = ' +  massQue);
+        
+//     //         const min = Math.min(...massQue)
+//     //         i = massQue.indexOf(min);
+//     //         if(i >= 0) {
+//     //             massQue.splice(i,1);
+//     //         }
+//     //         newArr.push(min)
+//     // }
+
+//     // console.log('newArr = ' + newArr);
+//     // console.log('massQueFinish = '+massQue);
+// }
+
+// queueTime([], 1)//, 0);
+// queueTime([1,2,3,4], 1)//, 10);
+// queueTime([2,2,3,3,4,4], 2)//, 9);
+// queueTime([1,2,3,4,5], 100)//, 5);
+//queueTime([33,35,28,23,29,6,48,28,28,16,19,31,38,13,6,41,37,3], 3)//, 5);
+//and n = 3 - Expected: 164, instead got: 231
+//queueTime([31,47,50,44,12,44,41,37,41,8,2], 5)//, 5);
+ //and n = 5 - Expected: 88, instead got: 178.5
+ function queueTime(customers, n) { 
+   
+   console.log('Покупатели до = ' + customers);
+
+   var removed = customers.splice(0, n);
+
+   console.log('Покупатели ставшие в очередь = ' + removed);
+
+    const min = Math.min(...removed)
+    let Ri = removed.indexOf(min);
+
+    const summ = removed.reduce((total, item) => {
+        return total + item
+    }, 0)
+
+    console.log(summ);
+
+    const minusMinArr = removed.map((item, index) => {
+        return item - min
+    })
+
+    console.log('оставшиеся покупатели  = '+ customers);
+
+    minusMinArr.forEach((item,index) => {
+        if(item <= 0){
+            console.log('Нашли покупателя который освободил кассу номер = ' + index);
+           let tackedCustumer =  customers.shift()
+           console.log(`Пришел новый покупатель с вот таким ${tackedCustumer} кол`);
+           minusMinArr.splice(Ri, 1, tackedCustumer);
+        }
+    })
+
+    console.log("До вставки покупателя" + minusMinArr);
+    console.log("После вставки покупателя" + minusMinArr);
+
+    console.log(min);
+    
+ }
+
+ //queueTime([1,2,3,4,5], 100)//, 5);
+
+ queueTime([31,47,50,44,12,44,41,37,41,8,2], 5)//, 5); Expected: 88,
+// should return 12
