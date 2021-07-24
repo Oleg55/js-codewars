@@ -385,46 +385,149 @@ function persistence(num) {
 //and n = 3 - Expected: 164, instead got: 231
 //queueTime([31,47,50,44,12,44,41,37,41,8,2], 5)//, 5);
  //and n = 5 - Expected: 88, instead got: 178.5
- function queueTime(customers, n) { 
-   
-   console.log('Покупатели до = ' + customers);
+ function queueTime(customers, n) {
+        if(customers.length == 0){
+            console.log('count = ' + 0);
+            return 0
+        }else if(customers.length == n){
+            console.log('count = ' + customers[0]);
+            return customers[0]
+        }else if(customers.length < n){
+            const maxNow = Math.max(...customers)
+            console.log('count = ' + maxNow);
+            return maxNow
+        }else {
+            // function tackedCustumer(customers, n){
+        console.log('Покупатели изначально = ' + customers);
+        console.log('Кол-во касс = ' + n);
+        console.log('Длинна очереди покупателке = ' + customers.length);
+        const removed = customers.splice(0, n);
+        console.log('Покупатели ставшие в очередь = ' + removed);
+    
+        //смотрим общее время покупателей на кассах
+        const summ = removed.reduce((total, item) => {
+            return total + item
+        }, 0)
+        console.log('Общая сумма времени в очереди = ' + summ);
+                //ищем покупателя с самым меньшим времиним
+        const min = Math.min(...removed)
+        let Ri = removed.indexOf(min);
+        console.log('минимальный покупатель = ' + min + '<==========');
 
-   var removed = customers.splice(0, n);
+        //отнимаем самое маленькое время от всех покупателей
+        console.log('Отнимаем минимального покупателя от самого себя и от остальных  имитиркя конец времни');
+        const minusMinArr = removed.map((item, index) => {
+            return item - min
+        })
+        console.log("До вставки покупателя = " + minusMinArr);
 
-   console.log('Покупатели ставшие в очередь = ' + removed);
+        //видим что касса с самым меньшим временем освободилась и равна 0
+        console.log('оставшиеся покупатели  = '+ customers);
+        console.log('длинна оставшихся покупатели  = '+ customers.length);
 
-    const min = Math.min(...removed)
-    let Ri = removed.indexOf(min);
+        //проходимся по всем кассам с покупателями и находим кассу которая освободилась
+        //берем нового покупателя из массива customers в котором находятся оставшиеся покупатели
+        //и ставим его на освободившуюся кассу 
+        minusMinArr.forEach((item,index) => {
+            if(item <= 0){
+                console.log('Нашли покупателя который освободил кассу номер = ' + index);
 
-    const summ = removed.reduce((total, item) => {
-        return total + item
-    }, 0)
+            let tackedCustumer =  customers.shift()
+            console.log(`Пришел новый покупатель с вот таким ${tackedCustumer} кол`);
+            minusMinArr.splice(index, 1, tackedCustumer);
+            if(tackedCustumer != undefined && tackedCustumer != isNaN(tackedCustumer)) {
+                minusMinArr.splice(index, 1, tackedCustumer);
+            }else{
+                minusMinArr.splice(index, 1, 0);
+            }
+            }
+        })
+        //смотрим на то как выглядят кассы с покупателеми после того как подошел новый покупатель
+        console.log("После вставки покупателя те что сейчас на кассах = " + minusMinArr);
+        let theLastOfCustumers = customers
+        console.log("После вставки покупателя оставшиеся покупатели = " + theLastOfCustumers);
 
-    console.log(summ);
+        let count = [];
+        count.push(min)
 
-    const minusMinArr = removed.map((item, index) => {
-        return item - min
-    })
+        console.log('================================= out of mixCust ' + count);
 
-    console.log('оставшиеся покупатели  = '+ customers);
+        
 
-    minusMinArr.forEach((item,index) => {
-        if(item <= 0){
-            console.log('Нашли покупателя который освободил кассу номер = ' + index);
-           let tackedCustumer =  customers.shift()
-           console.log(`Пришел новый покупатель с вот таким ${tackedCustumer} кол`);
-           minusMinArr.splice(Ri, 1, tackedCustumer);
+        mixCusumer(minusMinArr,theLastOfCustumers, count)
+        function mixCusumer(minusMinArr2,theLastOfCustumers2 = 0){
+            console.log('мы попали в функцию mixCusumer');
+            console.log(`mixCusumer приняла в себя покупателей в очепери ${minusMinArr2}
+            и оставшихся покупателей ${theLastOfCustumers2}`);
+            console.log('длина оставшихся покупателей в функции mixCus = ' + theLastOfCustumers2.length);
+            //ищем покупателя с самым меньшим времиним
+            const min2 = Math.min(...minusMinArr2)
+            let Ri2 = removed.indexOf(min2);
+            console.log('минимальный покупатель = ' + min2 + '<==========');
+
+            count.push(min2)
+            console.log('Отнимаем минимального покупателя от самого себя и от остальных  имитиркя конец времни');
+            const minusMinArrFc = minusMinArr2.map((item, index) => {
+                return item - min2
+            })
+            console.log("До вставки покупателя = " + minusMinArrFc);
+            console.log('оставшиеся покупатели  = '+ theLastOfCustumers2);
+            console.log('длинна оставшихся покупатели  = '+ theLastOfCustumers2.length);
+            minusMinArrFc.forEach((item,index) => {
+                if(item <= 0){
+                    console.log('Нашли покупателя который освободил кассу номер = ' + index);
+                    let tackedCustumer2 =  theLastOfCustumers2.shift()
+                    console.log(`Пришел новый покупатель с вот таким ${tackedCustumer2} кол`);
+                    if(tackedCustumer2 != undefined && tackedCustumer2 != isNaN(tackedCustumer2)) {
+                        minusMinArrFc.splice(index, 1, tackedCustumer2);
+                    }else{
+                        minusMinArrFc.splice(index, 1, 0);
+                    }
+                }
+            })
+            console.log("После вставки покупателя те что сейчас на кассах = " + minusMinArrFc);
+
+            console.log("После вставки покупателя оставшиеся покупатели = " + theLastOfCustumers2);
+            if( theLastOfCustumers2.length > 0){
+                return mixCusumer(minusMinArrFc,theLastOfCustumers2)
+            }else if (theLastOfCustumers2.length == 0) {
+                const maxLast = Math.max(...minusMinArrFc)
+                //let Ri2 = removed.indexOf(min2);
+                console.log('Максимальный покупатель вконце = ' + maxLast + '<==========');
+                count.push(maxLast)
+            }else{
+                console.log('Все покупатели закончили покупки');
+            }
+
+            console.log('================================= in mixCust' + count);
         }
-    })
+        console.log('>>>>>>>>>>>>>>>>>>>>' + count + '<<<<<<<<<<<<<<<<<<<');
+        const sumCount = count.reduce((total,item) => {
+            return total + item
+        },0)
 
-    console.log("До вставки покупателя" + minusMinArr);
-    console.log("После вставки покупателя" + minusMinArr);
+        console.log(sumCount);
+        return sumCount
+        }
+    
+        
+       // return tackedCustumer(minusMinArr, 0) 
+   // }
 
-    console.log(min);
+    
+
+    //далее нам нужно передать массив с новым покупателем в функцию в которой мы найдем нового покупателя
+    //с самым маленьким значением 
+   
+        
+      
     
  }
 
- //queueTime([1,2,3,4,5], 100)//, 5);
+ //queueTime([1,2,3,4,5], 100)//, 5);// should return 12
 
- queueTime([31,47,50,44,12,44,41,37,41,8,2], 5)//, 5); Expected: 88,
-// should return 12
+ //queueTime([31,47,50,44,12,44,41,37,41,8,2], 5)//, 5); Expected: 88,
+ //queueTime([2,2,3,3,4,4], 2)//, 9);
+ //queueTime([1,2,3,4,5], 100)//, 5);
+ //queueTime([1,3,15,3,17,2,17,1,7,7,4,2,20,10,10,3,14,16,16,19,10,12,12,13,7,1,7,10,13,15,19,2,4,10,17,11,2,3,1,19,18,8,12,3,7,4,1,19,16,8,19,7,14,20,8,3,2,13,8,5,3,2,3,1,13,20,8,18,10,6,4,10,11,12,1,1,17], 15)//, 58);
+ queueTime([201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201], 9) //and n = 9 - Expected: 402, instead got: NaN
