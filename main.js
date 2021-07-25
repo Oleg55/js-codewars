@@ -531,3 +531,90 @@ function persistence(num) {
  //queueTime([1,2,3,4,5], 100)//, 5);
  //queueTime([1,3,15,3,17,2,17,1,7,7,4,2,20,10,10,3,14,16,16,19,10,12,12,13,7,1,7,10,13,15,19,2,4,10,17,11,2,3,1,19,18,8,12,3,7,4,1,19,16,8,19,7,14,20,8,3,2,13,8,5,3,2,3,1,13,20,8,18,10,6,4,10,11,12,1,1,17], 15)//, 58);
  queueTime([201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201,201], 9) //and n = 9 - Expected: 402, instead got: NaN
+
+ //https://www.codewars.com/kata/5208f99aee097e6552000148/train/javascript Break camelCase
+
+ function solution(string) {
+    const arrStr = string.split('')
+    let newStrIndex = []
+    const newStr = arrStr.map((item,index) => {
+        if(item === item.toUpperCase()) {
+            return   newStrIndex.push(index)
+        }
+    })
+    newStrIndex.push(string.length)
+    const newStr2 = newStrIndex.map((item,index) => {
+       return string.slice(newStrIndex[index - 1 ],item)
+    });
+
+    console.log(newStr2.join(' '));
+    return newStr2.join(' ')
+}
+
+
+solution('camelCasingTest')
+
+//https://www.codewars.com/kata/523a86aa4230ebb5420001e1/train/javascript Where my anagrams at?
+
+function anagrams(word, words) {
+    let array =  word.split('')
+    console.log(array);
+    console.log(words);
+
+    const hasArr = []
+    const countObj = {}
+    let countObjW = {}
+
+    array.forEach((item, index) => {
+        let count = 0
+        for(let i = 0; i < array.length; i++) {
+            if(array[i] === item) {
+                count++
+                countObj[item] = count
+            }
+        }
+    })
+
+    words.forEach((item, index) => {
+        let itemArr =  item.split('')
+        itemArr.forEach((itemW, indexW) => {
+            let countW = 0
+            for(let i = 0; i < itemArr.length; i++) {
+                if(itemArr[i] === itemW) {
+                    countW++
+                    countObjW[itemW] = countW
+                }
+            }
+        })
+
+        isEqual(countObj, countObjW)
+        function isEqual(countObj, countObjW) {
+            const props1 = Object.getOwnPropertyNames(countObj);
+            const props2 = Object.getOwnPropertyNames(countObjW);
+          
+            if (props1.length !== props2.length) {
+              return false;
+            }
+          
+            for (let i = 0; i < props1.length; i += 1) {
+              const prop = props1[i];
+          
+              if (countObj[prop] !== countObjW[prop]) {
+                return false;
+              }
+            }
+            hasArr.push(itemArr.join(''))
+            return true;
+          }
+        countObjW = {};
+    })
+
+    console.log(hasArr);
+    return hasArr
+   
+}
+
+anagrams('abbba', ['aabbb', 'abcd', 'bbbaa', 'dada', 'cccl']) //=> ['aabb', 'bbaa']
+
+//
+
