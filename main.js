@@ -616,5 +616,90 @@ function anagrams(word, words) {
 
 anagrams('abbba', ['aabbb', 'abcd', 'bbbaa', 'dada', 'cccl']) //=> ['aabb', 'bbaa']
 
-//
+
+//https://www.codewars.com/kata/52742f58faf5485cae000b9a/train/javascript Human readable duration format
+
+
+function formatDuration (seconds) {
+    // Complete this function
+    const d = new Date(seconds*1000)
+    const hours = seconds/3600
+    let massTime = []
+    let takeHours = Math.trunc(hours)
+    let takeDays = Math.trunc(takeHours/24)
+    if(takeDays > 0) {
+        takeHours = takeHours - (24 * takeDays)
+    }
+
+    let takeYears = Math.trunc(takeDays/365)
+
+    if(takeYears > 0){
+        takeDays = takeDays - (365 * takeYears)
+    }
+    
+    const takeMinutes = d.getMinutes()
+    const takeSeconds = d.getSeconds() 
+
+    let textYears = 'year'
+    let textDays = 'day'
+    let textHours = 'hour'
+    let texMin = 'minute'
+    let texSec = 'second'
+
+    takeYears > 1 ? textYears = textYears + 's' : textYears
+    takeDays > 1 ? textDays = textDays + 's' : textDays
+    takeHours > 1 ? textHours = textHours + 's' : textHours
+    takeMinutes > 1 ? texMin = texMin + 's' : texMin
+    takeSeconds > 1 ?  texSec = texSec + 's' : texSec
+
+    let blockYears = `${takeYears} ${textYears}`
+    let blockDays = `${takeDays} ${textDays}`
+    let blockHours = `${takeHours} ${textHours}`
+    let blockMin = `${takeMinutes} ${texMin}`
+    let blockSec = `${takeSeconds} ${texSec}`
+
+    takeYears == 0 ? blockYears = '' : massTime.push(blockYears)
+    takeDays == 0 ? blockDays = '' : massTime.push(blockDays)
+    takeHours == 0 ? blockHours = '' : massTime.push(blockHours)
+    takeMinutes == 0 ? blockMin = '' : massTime.push(blockMin)
+    takeSeconds == 0 ? blockSec = '' : massTime.push(blockSec)
+
+
+    let regex = /\s+([.,!":])/g;
+    if(isNaN(takeSeconds) || massTime.length == 0){
+        massTime = []
+        massTime.join()
+        massTime.splice(0, 0, "now");
+    }
+    else if(massTime.length === 5){
+        massTime.splice(1, 0, ",");
+        massTime.splice(3, 0, ",");
+        massTime.splice(5, 0, ",");
+        massTime.join()
+        massTime.splice(massTime.length - 1, 0, "and");
+        massTime.join().replace(regex, '$1')
+    }else if(massTime.length === 4){
+        massTime.splice(1, 0, ",");
+        massTime.splice(3, 0, ",");
+        massTime.join()
+        massTime.splice(massTime.length - 1, 0, "and");
+        massTime.join().replace(regex, '$1')
+    }else if(massTime.length === 3) {
+        const and = 'and'
+        massTime.join()
+        massTime.splice(massTime.length - 1, 0, "and");
+        massTime.splice(1, 0, ",");
+        massTime.join().replace(regex, '$1')
+    }else if(massTime.length === 2){
+        const and = 'and'
+        massTime.join()
+        massTime.splice(massTime.length - 1, 0, "and");
+        massTime.join().replace(regex, '$1')
+    }
+    console.log(massTime.join(' ').replace(regex, '$1'));
+    return massTime.join(' ').replace(regex, '$1')
+    //console.log(`${blockHours} ${blockMin} ${blockSec}`);
+  }
+
+formatDuration(100000000)//, "1 minute and 2 seconds");
 
